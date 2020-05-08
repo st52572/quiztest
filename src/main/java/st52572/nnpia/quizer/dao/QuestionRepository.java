@@ -5,7 +5,7 @@ import st52572.nnpia.quizer.model.Question;
 
 import java.util.List;
 
-public interface QuestionDao extends JpaRepository<Question, Integer> {
+public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     public List<Question> findByTestId(int testId);
 

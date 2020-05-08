@@ -119,7 +119,7 @@ export class CreateTest extends React.Component {
                                 <Input onChange={this.change} chaning={"answer"} type={"text"} index={index}
                                        text={"Answer:"} value={value.answer}/>
                                 <button className={"btn btn-dark"}
-                                        onClick={event => this.remove(event, index)}>Remove {index}</button>
+                                        onClick={event => this.remove(event, index)}>Remove</button>
                                 </div>
                             )
                         }

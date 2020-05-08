@@ -24,10 +24,10 @@ public class Test implements Serializable {
     @Column
     private String name;
 
-    @JsonIgnore
+    /*@JsonIgnore
     @OneToMany(mappedBy = "test", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Question> questions;
-
+*/
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)

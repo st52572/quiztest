@@ -5,42 +5,44 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import st52572.nnpia.quizer.model.User;
 import st52572.nnpia.quizer.testutil.Creator;
-
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceTest {
 
-    /*@Autowired
-    IssueService issueService;
+    @Autowired
+    IUserService iUserService;
 
     @Autowired
-    IssueRepository issueRepository;*/
+    private BCryptPasswordEncoder bcryptEncoder;
+
 
     @Autowired
     Creator creator;
 
 
     @Test
-    public void testDeleteUsersIssues() {
-        User assignee = (User) creator.saveEntity(new User());
+    public void loginSuccessful() {
+        User newUser = new User();
+        newUser.setUsername("username");
+        newUser.setPassword(bcryptEncoder.encode("password"));
+        User user = (User) creator.saveEntity(newUser);
+        iUserService.delete(user.getId());
 
-/*
-        Issue issue1 = new Issue();
-        issue1.setAssignee(assignee);
-        Issue issue2 = new Issue();
-        issue2.setAssignee(assignee);
+    }
 
-        creator.saveEntities(issue1, issue2);
+    @Test
+    public void loginUnSuccessful() {
+        User newUser = new User();
+        newUser.setUsername("username");
+        newUser.setPassword(bcryptEncoder.encode("password"));
+        User user = (User) creator.saveEntity(newUser);
+        iUserService.delete(user.getId());
 
-        Assertions.assertEquals(2, issueRepository.findAll().size());
-
-        Long assigneeId = issue1.getAssignee().id;
-        issueService.deleteUsersIssues(assigneeId);
-        Assertions.assertEquals(0, issueRepository.findAll().size());*/
     }
 }
