@@ -12,8 +12,7 @@ export class Registration extends React.Component {
 
     register = (e) => {
         e.preventDefault();
-        fetch('http://localhost:8080/users/add', FetchUtil.createFetchPostNoBearer(this.state.user))
-            .then();
+        FetchUtil.createFetchPostNoBearer(this.state.user,'http://localhost:8080/users/add').then();
     };
 
     change = (event) => {

@@ -3,8 +3,8 @@ import AuthService from "../service/AuthService";
 
 class FetchUtil {
 
-    createFetchPost(body) {
-        return {
+    createFetchPost(body, url) {
+        const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -12,21 +12,23 @@ class FetchUtil {
             },
             body: JSON.stringify(body)
         };
-
+        return fetch(url, options);
 
     }
-    createFetchPostNoBearer(body) {
-        return {
+
+    createFetchPostNoBearer(body, url) {
+        const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(body)
         };
+        return fetch(url, options);
     }
 
-    createFetchGet(body) {
-        return  {
+    createFetchGet(body, url) {
+        const options = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,17 +36,18 @@ class FetchUtil {
             },
             body: JSON.stringify(body)
         };
-
+        return fetch(url, options);
     }
-    createFetchGetNoBearer(body) {
-        return  {
+
+    createFetchGetNoBearer(body, url) {
+        const options = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(body)
         };
-
+        return fetch(url, options);
     }
 }
 

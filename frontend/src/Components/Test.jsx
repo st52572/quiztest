@@ -17,7 +17,7 @@ export class Test extends React.Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        fetch('http://localhost:8080/questions/' + id, FetchUtil.createFetchGet())
+        FetchUtil.createFetchGet(null,'http://localhost:8080/questions/'+ id)
             .then(response => response.json())
             .then(data => {
                 this.setState({test: {questions: data}})
@@ -36,7 +36,7 @@ export class Test extends React.Component {
 
     sendTest = () =>{
         const test = this.state.test;
-        fetch('http://localhost:8080/questions/checkTest', FetchUtil.createFetchPost(test.questions))
+        FetchUtil.createFetchPost(test.questions,'http://localhost:8080/questions/checkTest')
             .then(response => response.json())
             .then(data => this.setState({result: "Result of test: "+ data*100+"%"}));
     };

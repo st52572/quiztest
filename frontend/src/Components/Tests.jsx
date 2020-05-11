@@ -31,7 +31,7 @@ export class Tests extends React.Component {
         if (filter) {
             url = 'http://localhost:8080/tests/' + filter + '?page=' + page + '&size='+this.state.pageSize;
         }
-        fetch(url, FetchUtil.createFetchPost())
+        FetchUtil.createFetchPost(null,url)
             .then(response => response.json())
             .then(data => this.setState({
                 page: data,

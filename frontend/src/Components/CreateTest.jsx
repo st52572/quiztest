@@ -63,10 +63,10 @@ export class CreateTest extends React.Component {
     createTest = (e) => {
         e.preventDefault();
         const name = this.state.test.name;
-        fetch('http://localhost:8080/tests/add', FetchUtil.createFetchPost({
+        FetchUtil.createFetchPost({
             name: name,
             user: {id: UserProfile.getId()}
-        }))
+        }, 'http://localhost:8080/tests/add')
             .then(response => response.json())
             .then(data => this.saveQuestions(data));
     };
@@ -80,8 +80,7 @@ export class CreateTest extends React.Component {
                 return {test};
             })
         }
-        fetch('http://localhost:8080/questions/save', FetchUtil.createFetchPost(this.state.test.questions))
-            .then()
+        FetchUtil.createFetchPost(this.state.test.questions,'http://localhost:8080/questions/save').then();
     };
 
 

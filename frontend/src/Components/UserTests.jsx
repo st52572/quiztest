@@ -34,7 +34,7 @@ export class UserTests extends React.Component {
         if (filter) {
             url = 'http://localhost:8080/tests/user/' + id + '/' + filter + '?page=' + page + '&size='+this.state.pageSize;
         }
-        fetch(url, FetchUtil.createFetchPost())
+        FetchUtil.createFetchPost(null,url)
             .then(response => response.json())
             .then(data => this.setState({
                 page: data,
@@ -59,8 +59,8 @@ export class UserTests extends React.Component {
 
     onDelete = (id) => {
         let url = 'http://localhost:8080/tests/delete/' + id;
-
-        fetch(url, FetchUtil.createFetchPost()).then(value => this.fetchURL(0, this.state.filter));
+        FetchUtil.createFetchPost(null, url)
+        .then(value => this.fetchURL(0, this.state.filter));
     };
 
     render() {
