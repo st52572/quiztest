@@ -21,12 +21,6 @@ export class Test extends React.Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        /*this.setState(prevState => {
-            let test = {...prevState.test};
-            test.questions[0] = {test:{}};
-            test.questions[0].test = {id: this.props.match.params.id};
-            return {test};                            // return new object jasper object
-        });*/
         const requestOptions = {
             method: 'GET',
             headers: {
@@ -69,7 +63,7 @@ export class Test extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
+
                 <div>
                     <label key={"result"}>{this.state.result}</label>
                     <div>
@@ -83,7 +77,7 @@ export class Test extends React.Component {
                         <button className={"btn btn-dark"} onClick={this.sendTest}>Send test</button>
                     </div>
                 </div>
-            </React.Fragment>
+
         )
     }
 

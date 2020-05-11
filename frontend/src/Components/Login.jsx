@@ -53,11 +53,17 @@ export class Login extends React.Component {
 
     render() {
         return (
-            <div>
-                <Input type={"text"} chaning={"username"} onChange={this.change} text={"username"}/>
-                <Input type={"current-password"} chaning={"password"} onChange={this.change} text={"password"}/>
-                <button className={"btn btn-dark"} onClick={this.login}>Login</button>
-            </div>
+            <form>
+                <div className="form-group col-md-3">
+                    <Input type={"text"} chaning={"username"} onChange={this.change} text={"username"}/>
+                </div>
+                <div className="form-group col-md-3">
+                    <Input type={"current-password"} chaning={"password"} onChange={this.change} text={"password"}/>
+                </div>
+                <div className="form-group col-md-3">
+                    <button className={"btn btn-dark"} onClick={this.login}>Login</button>
+                </div>
+            </form>
         )
     }
 
