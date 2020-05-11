@@ -10,7 +10,7 @@ import st52572.nnpia.quizer.model.UserDto;
 import st52572.nnpia.quizer.service.IUserService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RequestMapping("/users")
 public class UserController {
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Input} from "./Input";
-import AuthService from "../service/AuthService";
 import UserProfile from './UserProfile';
+import FetchUtil from "../service/FetchUtil";
 
 
 export class CreateTest extends React.Component {
@@ -30,18 +30,18 @@ export class CreateTest extends React.Component {
     changeName = (event) => {
         const tar = event.changing;
         this.setState(prevState => {
-            let test = {...prevState.test};  // creating copy of state variable jasper
-            test[tar] = event.text;                     // update the name property, assign a new value
-            return {test};                            // return new object jasper object
+            let test = {...prevState.test};
+            test[tar] = event.text;
+            return {test};
         })
     };
 
     change = (event) => {
         const tar = event.changing;
         this.setState(prevState => {
-            let test = {...prevState.test};  // creating copy of state variable jasper
-            test.questions[event.index][tar] = event.text;                     // update the name property, assign a new value
-            return {test};                            // return new object jasper object
+            let test = {...prevState.test};
+            test.questions[event.index][tar] = event.text;
+            return {test};
         });
     };
 
@@ -63,15 +63,10 @@ export class CreateTest extends React.Component {
     createTest = (e) => {
         e.preventDefault();
         const name = this.state.test.name;
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + AuthService.getUserInfo().token
-            },
-            body: JSON.stringify({name: name, user: {id: UserProfile.getId()}})
-        };
-        fetch('http://localhost:8080/tests/add', requestOptions)
+        fetch('http://localhost:8080/tests/add', FetchUtil.createFetchPost({
+            name: name,
+            user: {id: UserProfile.getId()}
+        }))
             .then(response => response.json())
             .then(data => this.saveQuestions(data));
     };
@@ -85,15 +80,7 @@ export class CreateTest extends React.Component {
                 return {test};
             })
         }
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + AuthService.getUserInfo().token
-            },
-            body: JSON.stringify(this.state.test.questions)
-        };
-        fetch('http://localhost:8080/questions/save', requestOptions)
+        fetch('http://localhost:8080/questions/save', FetchUtil.createFetchPost(this.state.test.questions))
             .then()
     };
 
@@ -112,8 +99,8 @@ export class CreateTest extends React.Component {
                         {
 
                             this.state.test.questions.map((value, index) =>
-                                <div className="form-group col-md-3">
-                                    <div className={"m-2"} key={index}>
+                                <div key={index} className="form-group col-md-3">
+                                    <div className={"m-2"}>
                                         <Input onChange={this.change} chaning={"question"} type={"text"}
                                                index={index}
                                                text={"Question:"} value={value.question}/>

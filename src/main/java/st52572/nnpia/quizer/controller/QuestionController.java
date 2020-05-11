@@ -8,7 +8,7 @@ import st52572.nnpia.quizer.service.IQuestionService;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RequestMapping("/questions")
 public class QuestionController {
 

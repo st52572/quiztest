@@ -10,7 +10,7 @@ import st52572.nnpia.quizer.service.ITestService;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RequestMapping("/tests")
 public class TestController {
 
