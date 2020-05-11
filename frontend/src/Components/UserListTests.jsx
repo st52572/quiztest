@@ -3,8 +3,9 @@ import Pagination from "react-js-pagination";
 import {Input} from "./Input";
 import UserProfile from "./UserProfile";
 import FetchUtil from "../service/FetchUtil";
+import {Link} from "react-router-dom";
 
-export class UserTests extends React.Component {
+export class UserListTests extends React.Component {
 
 
     constructor(props) {
@@ -32,9 +33,9 @@ export class UserTests extends React.Component {
         const id = UserProfile.getId();
         let url = 'http://localhost:8080/tests/user/' + id + '?page=' + page + '&size='+this.state.pageSize;
         if (filter) {
-            url = 'http://localhost:8080/tests/user/' + id + '/' + filter + '?page=' + page + '&size='+this.state.pageSize;
+            url = 'http://localhost:8080/tests/user/filtered/' + id + '?page=' + page + '&size='+this.state.pageSize;
         }
-        FetchUtil.createFetchPost(null,url)
+        FetchUtil.createFetchPost({filter},url)
             .then(response => response.json())
             .then(data => this.setState({
                 page: data,
@@ -76,6 +77,7 @@ export class UserTests extends React.Component {
                                 <button className={"btn btn-danger"}
                                         onClick={event => this.onDelete(value.id)}>Delete
                                 </button>
+                                <Link className={"btn btn-dark ml-2"} to={"/test-edit/" + value.id} >Edit test</Link>
                             </div>
                         )
                     }

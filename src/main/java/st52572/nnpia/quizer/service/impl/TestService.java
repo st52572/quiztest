@@ -44,7 +44,7 @@ public class TestService implements ITestService {
     }
 
     @Override
-    public Test get(Long id) {
+    public Test get(int id) {
         Optional<Test> test = testRepository.findById(id);
         return test.orElseGet(Test::new);
     }

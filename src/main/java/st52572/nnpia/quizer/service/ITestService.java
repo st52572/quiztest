@@ -16,7 +16,7 @@ public interface ITestService {
 
     Page<Test> getAllUserTestsFiltered(int id, String filer, Pageable pageable);
 
-    Test get(Long id);
+    Test get(int id);
 
     void delete(int id);
 

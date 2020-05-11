@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import st52572.nnpia.quizer.model.Test;
 
 @Repository
-public interface TestRepository extends PagingAndSortingRepository<Test, Long> {
+public interface TestRepository extends PagingAndSortingRepository<Test, Integer> {
 
     //Page<Test> findByName(String name, Pageable pageable);
 

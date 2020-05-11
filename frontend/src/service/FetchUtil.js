@@ -27,25 +27,23 @@ class FetchUtil {
         return fetch(url, options);
     }
 
-    createFetchGet(body, url) {
+    createFetchGet(url) {
         const options = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + AuthService.getUserInfo().token
             },
-            body: JSON.stringify(body)
         };
         return fetch(url, options);
     }
 
-    createFetchGetNoBearer(body, url) {
+    createFetchGetNoBearer(url) {
         const options = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(body)
         };
         return fetch(url, options);
     }

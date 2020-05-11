@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import st52572.nnpia.quizer.model.Filter;
 import st52572.nnpia.quizer.model.Test;
 import st52572.nnpia.quizer.service.ITestService;
 
@@ -24,9 +25,10 @@ public class TestController {
         return iTestService.getAll(pageable);
     }
 
-    @PostMapping("/{filter}")
-    public Page<Test> getTests(@PathVariable String filter, Pageable pageable) {
-        return iTestService.getAllFiltered(filter, pageable);
+    @PostMapping("/filtered")
+    public Page<Test> getTests(@RequestBody Filter filter, Pageable pageable) {
+
+        return iTestService.getAllFiltered(filter.getFilter(), pageable);
     }
 
     @PostMapping("/user/{id}")
@@ -34,13 +36,13 @@ public class TestController {
         return iTestService.getAllUserTests(id, pageable);
     }
 
-    @PostMapping("/user/{id}/{filter}")
-    public Page<Test> getTests(@PathVariable int id, @PathVariable String filter, Pageable pageable) {
-        return iTestService.getAllUserTestsFiltered(id, filter, pageable);
+    @PostMapping("/user/filtered/{id}")
+    public Page<Test> getTests(@PathVariable int id, @RequestBody Filter filter, Pageable pageable) {
+        return iTestService.getAllUserTestsFiltered(id, filter.getFilter(), pageable);
     }
 
     @GetMapping(value = {"/{id}"})
-    public Test getTest(@PathVariable Long id) {
+    public Test getTest(@PathVariable int id) {
         return iTestService.get(id);
     }
 

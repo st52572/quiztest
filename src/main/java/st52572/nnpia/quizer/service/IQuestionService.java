@@ -1,14 +1,21 @@
 package st52572.nnpia.quizer.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import st52572.nnpia.quizer.model.Question;
+import st52572.nnpia.quizer.model.Test;
 
 import java.util.List;
 
 public interface IQuestionService {
 
-    List<Question> getQuestions(int id);
+    Page<Question> getQuestions(int id, Pageable pageable);
 
     double checkTest(List<Question> answers);
 
-    List<Question> addQuestions(List<Question> questions);
+    List<Question> getAllQuestions(int testId);
+
+    void addQuestions(List<Question> questions);
+
+    void delete(int id);
 }

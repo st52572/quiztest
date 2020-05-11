@@ -2,8 +2,9 @@ import React from 'react';
 import Pagination from "react-js-pagination";
 import {Input} from "./Input";
 import FetchUtil from "../service/FetchUtil";
+import {Link} from "react-router-dom";
 
-export class Tests extends React.Component {
+export class ListTests extends React.Component {
 
 
     constructor(props) {
@@ -27,11 +28,11 @@ export class Tests extends React.Component {
     }
 
     fetchURL(page, filter) {
-        let url = 'http://localhost:8080/tests?page=' + page + '&size='+this.state.pageSize;
+        let url = 'http://localhost:8080/tests?page=' + page + '&size=' + this.state.pageSize;
         if (filter) {
-            url = 'http://localhost:8080/tests/' + filter + '?page=' + page + '&size='+this.state.pageSize;
+            url = 'http://localhost:8080/tests/filtered?page=' + page + '&size=' + this.state.pageSize;
         }
-        FetchUtil.createFetchPost(null,url)
+        FetchUtil.createFetchPost({filter}, url)
             .then(response => response.json())
             .then(data => this.setState({
                 page: data,
@@ -62,11 +63,10 @@ export class Tests extends React.Component {
                 </div>
                 <div className="form-group ml-3">
                     {
-                        this.state.tests.map((value, index) => <div className="form-group col-md-3 p-2 mt-3 border" key={index}>
+                        this.state.tests.map((value, index) => <div className="form-group col-md-3 p-2 mt-3 border"
+                                                                    key={index}>
                                 <h4>Test: {value.name}</h4>
-                            <button className={"btn btn-dark"}
-                                    onClick={event => window.location.replace("/test/" + value.id)}>Start test
-                            </button>
+                                    <Link className={"btn btn-dark"} to={"/test/" + value.id} >Start test</Link>
                             </div>
                         )
                     }
