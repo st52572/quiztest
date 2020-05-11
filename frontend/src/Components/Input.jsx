@@ -17,7 +17,7 @@ export class Input extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div className="input-group-prepend">
+                <div className="input-group-prepend mt-2">
                     <span className="input-group-text" id="basic-addon1">{this.props.text}</span>
                 </div>
                 <input className={"form-control"} type={this.props.type} onChange={this.handleChange}

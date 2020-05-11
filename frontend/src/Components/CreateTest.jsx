@@ -9,9 +9,6 @@ export class CreateTest extends React.Component {
 
     constructor(props) {
         super(props);
-        if (localStorage.getItem("userInfo") == null) {
-            window.location.replace("/login");
-        }
         this.state = {
             count: 0,
             test: {
@@ -104,27 +101,34 @@ export class CreateTest extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div>
+                <div className="form-group col-md-3">
                     <Input onChange={this.changeName} chaning={"name"} type={"text"} text={"Name of the test:"}
                            value={this.state.name}/>
-
+                    <button className={"btn btn-dark"} onClick={this.addQuestion}>Add question</button>
+                    <button className={"btn btn-dark m-3"} onClick={this.createTest}>Create Test</button>
                 </div>
                 <div>
-                    <button className={"btn btn-dark"} onClick={this.addQuestion}>Add question</button>
-                    <form>
+                    <div className="row">
                         {
-                            this.state.test.questions.map((value, index) => <div key={index}>
-                                <Input onChange={this.change} chaning={"question"} type={"text"} index={index}
-                                       text={"Question:"} value={value.question}/>
-                                <Input onChange={this.change} chaning={"answer"} type={"text"} index={index}
-                                       text={"Answer:"} value={value.answer}/>
-                                <button className={"btn btn-dark"}
-                                        onClick={event => this.remove(event, index)}>Remove</button>
+
+                            this.state.test.questions.map((value, index) =>
+                                <div className="form-group col-md-3">
+                                    <div className={"m-2"} key={index}>
+                                        <Input onChange={this.change} chaning={"question"} type={"text"}
+                                               index={index}
+                                               text={"Question:"} value={value.question}/>
+
+                                        <Input onChange={this.change} chaning={"answer"} type={"text"} index={index}
+                                               text={"Answer:"} value={value.answer}/>
+                                        <button className={"btn btn-dark mt-2"}
+                                                onClick={event => this.remove(event, index)}>Remove
+                                        </button>
+                                    </div>
                                 </div>
                             )
                         }
-                        <button className={"btn btn-dark"} onClick={this.createTest}>Create Test</button>
-                    </form>
+                    </div>
+
                 </div>
             </React.Fragment>
         )
