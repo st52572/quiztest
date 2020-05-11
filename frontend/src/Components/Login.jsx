@@ -2,6 +2,7 @@ import React from 'react';
 import {Input} from "./Input";
 import AuthService from "../service/AuthService";
 import UserProfile from "./UserProfile";
+import FetchUtil from "../service/FetchUtil";
 
 export class Login extends React.Component {
 
@@ -18,12 +19,7 @@ export class Login extends React.Component {
     login = (e) => {
         e.preventDefault();
         const credentials = {username: this.state.user.username, password: this.state.user.password};
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({username: credentials.username})
-        };
-        fetch('http://localhost:8080/users/get', requestOptions)
+        fetch('http://localhost:8080/users/get', FetchUtil.createFetchPostNoBearer({username: credentials.username}))
             .then(response => response.json())
             .then(data => {
                 UserProfile.setId(data.id);
@@ -32,7 +28,6 @@ export class Login extends React.Component {
         AuthService.login(credentials).then(res => {
             if (res.data.status === 200) {
                 localStorage.setItem("userInfo", JSON.stringify(res.data.result));
-                window.location.replace("/tests");
             } else {
                 this.setState({message: res.data.message});
             }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Input} from "./Input";
-
+import FetchUtil from "../service/FetchUtil";
 
 export class Registration extends React.Component {
 
@@ -12,14 +12,8 @@ export class Registration extends React.Component {
 
     register = (e) => {
         e.preventDefault();
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(this.state.user)
-        };
-        console.log(JSON.stringify(this.state.user));
-        fetch('http://localhost:8080/users/add', requestOptions)
-            .then(window.location.replace("/login"));
+        fetch('http://localhost:8080/users/add', FetchUtil.createFetchPostNoBearer(this.state.user))
+            .then();
     };
 
     change = (event) => {

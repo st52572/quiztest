@@ -1,8 +1,7 @@
 import React from 'react';
-import AuthService from "../service/AuthService";
 import Pagination from "react-js-pagination";
 import {Input} from "./Input";
-
+import FetchUtil from "../service/FetchUtil";
 
 export class Tests extends React.Component {
 
@@ -32,14 +31,7 @@ export class Tests extends React.Component {
         if (filter) {
             url = 'http://localhost:8080/tests/' + filter + '?page=' + page + '&size='+this.state.pageSize;
         }
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'accepts': 'application/json',
-                Authorization: 'Bearer ' + AuthService.getUserInfo().token
-            },
-        };
-        fetch(url, requestOptions)
+        fetch(url, FetchUtil.createFetchPost())
             .then(response => response.json())
             .then(data => this.setState({
                 page: data,

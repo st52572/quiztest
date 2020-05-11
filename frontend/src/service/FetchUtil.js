@@ -1,6 +1,5 @@
 import AuthService from "../service/AuthService";
 
-let response;
 
 class FetchUtil {
 
@@ -16,6 +15,15 @@ class FetchUtil {
 
 
     }
+    createFetchPostNoBearer(body) {
+        return {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        };
+    }
 
     createFetchGet(body) {
         return  {
@@ -23,6 +31,16 @@ class FetchUtil {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + AuthService.getUserInfo().token
+            },
+            body: JSON.stringify(body)
+        };
+
+    }
+    createFetchGetNoBearer(body) {
+        return  {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(body)
         };

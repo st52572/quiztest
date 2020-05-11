@@ -1,16 +1,12 @@
 import React from 'react';
 import {Input} from "./Input";
-import AuthService from "../service/AuthService";
-
+import FetchUtil from "../service/FetchUtil";
 
 export class Test extends React.Component {
 
 
     constructor(props) {
         super(props);
-        if (localStorage.getItem("userInfo") == null) {
-            window.location.replace("/login");
-        }
         this.state = {
             result: "",
             test: {
@@ -21,14 +17,7 @@ export class Test extends React.Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        const requestOptions = {
-            method: 'GET',
-            headers: {
-                'accepts': 'application/json',
-                Authorization: 'Bearer ' + AuthService.getUserInfo().token
-            },
-        };
-        fetch('http://localhost:8080/questions/' + id, requestOptions)
+        fetch('http://localhost:8080/questions/' + id, FetchUtil.createFetchGet())
             .then(response => response.json())
             .then(data => {
                 this.setState({test: {questions: data}})
@@ -47,16 +36,7 @@ export class Test extends React.Component {
 
     sendTest = () =>{
         const test = this.state.test;
-        console.log(JSON.stringify(test.questions));
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + AuthService.getUserInfo().token
-            },
-            body: JSON.stringify(test.questions)
-        };
-        fetch('http://localhost:8080/questions/checkTest', requestOptions)
+        fetch('http://localhost:8080/questions/checkTest', FetchUtil.createFetchPost(test.questions))
             .then(response => response.json())
             .then(data => this.setState({result: "Result of test: "+ data*100+"%"}));
     };
