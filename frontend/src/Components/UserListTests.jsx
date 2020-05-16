@@ -73,7 +73,7 @@ export class UserListTests extends React.Component {
                 <div className="form-group ml-3">
                     {
                         this.state.tests.map((value, index) => <div className="form-group col-md-3 p-2 mt-3 border" key={index}>
-                                <h4>Test: {value.name}</h4>
+                                <h4>{value.tag}: {value.name}</h4>
                                 <button className={"btn btn-danger"}
                                         onClick={event => this.onDelete(value.id)}>Delete
                                 </button>

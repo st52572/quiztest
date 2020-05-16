@@ -24,6 +24,9 @@ public class Test implements Serializable {
     @Column
     private String name;
 
+    @Column
+    private String tag;
+
     /*@JsonIgnore
     @OneToMany(mappedBy = "test", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Question> questions;

@@ -12,6 +12,7 @@ export class CreateTest extends React.Component {
         this.state = {
             count: 0,
             test: {
+                tag: "",
                 name: "",
                 questions: []
             }
@@ -27,7 +28,7 @@ export class CreateTest extends React.Component {
         this.setState({count: this.state.count + 1});
     };
 
-    changeName = (event) => {
+    changeI = (event) => {
         const tar = event.changing;
         this.setState(prevState => {
             let test = {...prevState.test};
@@ -62,9 +63,9 @@ export class CreateTest extends React.Component {
 
     createTest = (e) => {
         e.preventDefault();
-        const name = this.state.test.name;
         FetchUtil.createFetchPost({
-            name: name,
+            tag: this.state.test.tag,
+            name: this.state.test.name,
             user: {id: UserProfile.getId()}
         }, 'http://localhost:8080/tests/add')
             .then(response => response.json())
@@ -88,8 +89,10 @@ export class CreateTest extends React.Component {
         return (
             <React.Fragment>
                 <div className="form-group col-md-3">
-                    <Input onChange={this.changeName} chaning={"name"} type={"text"} text={"Name of the test:"}
-                           value={this.state.name}/>
+                    <Input onChange={this.changeI} chaning={"tag"} type={"text"} text={"Tag of the test:"}
+                           value={this.state.test.tag}/>
+                    <Input onChange={this.changeI} chaning={"name"} type={"text"} text={"Name of the test:"}
+                           value={this.state.test.name}/>
                     <button className={"btn btn-dark"} onClick={this.addQuestion}>Add question</button>
                     <button className={"btn btn-dark m-3"} onClick={this.createTest}>Create Test</button>
                 </div>

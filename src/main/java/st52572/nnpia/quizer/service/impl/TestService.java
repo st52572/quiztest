@@ -8,7 +8,10 @@ import st52572.nnpia.quizer.dao.TestRepository;
 import st52572.nnpia.quizer.model.Test;
 import st52572.nnpia.quizer.service.ITestService;
 
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service(value = "testService")
@@ -25,22 +28,26 @@ public class TestService implements ITestService {
 
     @Override
     public Page<Test> getAll(Pageable pageable) {
-        return testRepository.findAll(pageable);
+        Page<Test> all = testRepository.findAll(pageable);
+        return all;
     }
 
     @Override
     public Page<Test> getAllFiltered(String filter, Pageable pageable) {
-        return testRepository.findByNameIsLike("%" + filter + "%", pageable);
+        Page<Test> all = testRepository.findByNameIsLike("%" + filter + "%", pageable);
+        return all;
     }
 
     @Override
     public Page<Test> getAllUserTests(int id, Pageable pageable) {
-        return testRepository.findByUser_Id(id, pageable);
+        Page<Test> all =  testRepository.findByUser_Id(id, pageable);
+        return all;
     }
 
     @Override
     public Page<Test> getAllUserTestsFiltered(int id, String filter, Pageable pageable) {
-        return testRepository.findByUser_IdAndNameIsLike(id, "%" + filter + "%", pageable);
+        Page<Test> all =  testRepository.findByUser_IdAndNameIsLike(id, "%" + filter + "%", pageable);
+        return all;
     }
 
     @Override

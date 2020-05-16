@@ -12,10 +12,11 @@ export class EditTest extends React.Component {
         this.state = {
             count: 0,
             name: "",
+            tag: "",
             test: {
-                name: "",
                 questions: []
             }
+
         }
     }
 
@@ -32,14 +33,9 @@ export class EditTest extends React.Component {
         this.setState({count: this.state.count + 1});
     };
 
-    changeName = (event) => {
+    changeI = (event) => {
         const tar = event.changing;
-        this.setState(prevState => {
-            let test = {...prevState.test};
-            test[tar] = event.text;
-            return {test};
-        });
-        this.setState({name: event.text});
+        this.setState({[tar]: event.text});
     };
 
     change = (event) => {
@@ -55,7 +51,10 @@ export class EditTest extends React.Component {
         const id = this.props.match.params.id;
         FetchUtil.createFetchGet('http://localhost:8080/tests/'+id)
             .then(response => response.json())
-            .then(data => this.setState({name: data.name}));
+            .then(data => this.setState({
+                tag: data.tag,
+                name: data.name
+            }));
 
 
 
@@ -98,7 +97,8 @@ export class EditTest extends React.Component {
 
         FetchUtil.createFetchPost({
             id: this.props.match.params.id,
-            name: this.state.test.name,
+            tag: this.state.tag,
+            name: this.state.name,
             user: {id: UserProfile.getId()}
         }, 'http://localhost:8080/tests/add').then();
 
@@ -117,7 +117,6 @@ export class EditTest extends React.Component {
                 return {test};
             })
         }
-        console.log(JSON.stringify(this.state.test.questions));
         FetchUtil.createFetchPost(this.state.test.questions, 'http://localhost:8080/questions/save').then(value => this.load());
     };
 
@@ -126,7 +125,9 @@ export class EditTest extends React.Component {
         return (
             <React.Fragment>
                 <div className="form-group col-md-3">
-                    <Input onChange={this.changeName} chaning={"name"} type={"text"} text={"Name of the test:"}
+                    <Input onChange={this.changeI} chaning={"tag"} type={"text"} text={"Tag of the test:"}
+                           value={this.state.tag}/>
+                    <Input onChange={this.changeI} chaning={"name"} type={"text"} text={"Name of the test:"}
                            value={this.state.name}/>
                     <button className={"btn btn-dark"} onClick={this.addQuestion}>Add question</button>
                     <button className={"btn btn-dark m-3"} onClick={this.saveTest}>Save Test</button>

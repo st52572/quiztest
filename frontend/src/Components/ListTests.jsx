@@ -65,7 +65,7 @@ export class ListTests extends React.Component {
                     {
                         this.state.tests.map((value, index) => <div className="form-group col-md-3 p-2 mt-3 border"
                                                                     key={index}>
-                                <h4>Test: {value.name}</h4>
+                                <h4>{value.tag}: {value.name}</h4>
                                     <Link className={"btn btn-dark"} to={"/test/" + value.id} >Start test</Link>
                             </div>
                         )
