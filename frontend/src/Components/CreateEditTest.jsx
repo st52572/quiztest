@@ -1,6 +1,7 @@
 import React from 'react';
 import UserProfile from './UserProfile';
 import FetchUtil from "../service/FetchUtil";
+import Server from "../service/FetchUtil";
 import {CreateTest} from "./CreateTest";
 import {EditTest} from "./EditTest";
 
@@ -48,7 +49,7 @@ export class CreateEditTest extends React.Component {
     removeEdit = (index, id) => {
 
         if (id) {
-            const url = 'http://localhost:8080/questions/delete/' + id;
+            const url = Server.getUrl()+'questions/delete/' + id;
             FetchUtil.createFetchPost(null, url).then(value => this.load());
         } else {
             this.removeFromQuestions(index);
@@ -73,7 +74,7 @@ export class CreateEditTest extends React.Component {
             name: this.state.name,
             user: {id: UserProfile.getId()},
             questions: this.state.questions
-        }, 'http://localhost:8080/tests/add')
+        }, Server.getUrl+'tests/add')
             .then();
 
     };
@@ -81,7 +82,7 @@ export class CreateEditTest extends React.Component {
 
     load = () => {
         const id = this.props.match.params.id;
-        FetchUtil.createFetchGet('http://localhost:8080/tests/' + id)
+        FetchUtil.createFetchGet(Server.getUrl+'tests/' + id)
             .then(response => response.json())
             .then(data => this.setState({
                 tag: data.tag,
