@@ -1,8 +1,8 @@
 import React from 'react';
-import Pagination from "react-js-pagination";
-import {Input} from "./Input";
 import FetchUtil from "../service/FetchUtil";
-import {Link} from "react-router-dom";
+import {TestComponent} from "./TestComponent";
+import {PaginationComponent} from "./PaginationComponent";
+import {FilterComponent} from "./FilterComponent";
 
 export class ListTests extends React.Component {
 
@@ -18,6 +18,7 @@ export class ListTests extends React.Component {
             tests: [],
             pageSize: 4
         };
+
 
         this.handlePageChange = this.handlePageChange.bind(this);
         this.fetchURL = this.fetchURL.bind(this);
@@ -58,31 +59,14 @@ export class ListTests extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div className="form-group col-md-3">
-                    <Input type={"text"} onChange={this.changeFilter} text={"Filter"} value={this.state.filter}/>
-                </div>
+                <FilterComponent changeFilter={this.changeFilter} filter={this.state.filter}/>
                 <div className="form-group ml-3">
-                    {
-                        this.state.tests.map((value, index) => <div className="form-group col-md-3 p-2 mt-3 border"
-                                                                    key={index}>
-                                <h4>{value.tag}: {value.name}</h4>
-                                    <Link className={"btn btn-dark"} to={"/test/" + value.id} >Start test</Link>
-                            </div>
-                        )
-                    }
+                    <TestComponent editMode={false} tests={this.state.tests}/>
+                    <PaginationComponent activePage={this.state.activePage}
+                                         itemsCountPerPage={this.state.itemsCountPerPage}
+                                         totalItemsCount={this.state.totalItemsCount}
+                                         handlePageChange={this.handlePageChange}/>
 
-                    <div className="form-group col-md-3 p-2 mt-3">
-                        <Pagination hideNavigation
-                                    hideFirstLastPages
-                                    activePage={this.state.activePage}
-                                    itemsCountPerPage={this.state.itemsCountPerPage}
-                                    totalItemsCount={this.state.totalItemsCount}
-                                    pageRangeDisplayed={5}
-                                    itemClass='page-item'
-                                    linkClass='btn btn-light'
-                                    onChange={this.handlePageChange}
-                        />
-                    </div>
                 </div>
             </React.Fragment>
         )

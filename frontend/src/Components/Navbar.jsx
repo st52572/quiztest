@@ -2,11 +2,14 @@ import React from "react";
 import {NavbarLogged} from "./NavbarLogged";
 import {NavbarNotLogged} from "./NavbarNotLogged";
 
-export function Navbar() {
+export class Navbar extends React.Component {
 
-    return (
-        <nav className="navbar navbar-light bg-light">
-            {localStorage.getItem("userInfo") != null ? <NavbarLogged/> : <NavbarNotLogged/>}
-        </nav>
-    );
+
+    render() {
+        return (
+            <nav className="navbar navbar-light bg-light">
+                {this.props.loggedIn === true ? <NavbarLogged/> : <NavbarNotLogged/>}
+            </nav>
+        );
+    }
 }

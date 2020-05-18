@@ -12,12 +12,12 @@ export class Login extends React.Component {
         this.state = {
             logged: false,
             user: {}
-        }
+        };
+        this.login = this.login.bind(this);
     }
 
 
-    login = (e) => {
-        e.preventDefault();
+    login = () => {
         const credentials = {username: this.state.user.username, password: this.state.user.password};
         FetchUtil.createFetchPostNoBearer({username: credentials.username}, 'http://localhost:8080/users/get')
             .then(response => response.json())
@@ -28,6 +28,9 @@ export class Login extends React.Component {
         AuthService.login(credentials).then(res => {
             if (res.data.status === 200) {
                 localStorage.setItem("userInfo", JSON.stringify(res.data.result));
+                this.props.onLog();
+                this.props.history.push('/user-tests');
+
             } else {
                 this.setState({message: res.data.message});
             }

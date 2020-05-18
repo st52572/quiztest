@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import st52572.nnpia.quizer.model.Filter;
 import st52572.nnpia.quizer.model.Test;
+import st52572.nnpia.quizer.model.TestDto;
 import st52572.nnpia.quizer.service.ITestService;
 
 
@@ -42,14 +43,14 @@ public class TestController {
     }
 
     @GetMapping(value = {"/{id}"})
-    public Test getTest(@PathVariable int id) {
+    public TestDto getTest(@PathVariable int id) {
         return iTestService.get(id);
     }
 
     @PostMapping("/add")
-    public Integer addTest(@RequestBody Test test) {
+    public void addTest(@RequestBody TestDto test) {
+        System.out.println(test);
         iTestService.add(test);
-        return test.getId();
     }
 
     @PostMapping("/delete/{id}")

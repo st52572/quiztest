@@ -1,7 +1,7 @@
 import React from 'react';
 import {Input} from "./Input";
 import FetchUtil from "../service/FetchUtil";
-import Pagination from "react-js-pagination";
+import {PaginationComponent} from "./PaginationComponent";
 
 export class Test extends React.Component {
 
@@ -22,7 +22,8 @@ export class Test extends React.Component {
             totalItemsCount: 0,
             pageSize: 4,
             loadedPages: []
-        }
+        };
+
     }
 
     componentDidMount() {
@@ -52,9 +53,7 @@ export class Test extends React.Component {
             let i;
             let index = 0;
             const lowerBound = page * this.state.itemsCountPerPage;
-            const upperBound = page * this.state.itemsCountPerPage + 4;
-            alert(lowerBound);
-            alert(upperBound);
+            const upperBound = page * this.state.itemsCountPerPage + this.state.pageSize;
             for (i = lowerBound; i < upperBound && i < this.state.totalItemsCount; i++) {
                 array[index++] = this.state.allTests.questions[i];
             }
@@ -103,19 +102,11 @@ export class Test extends React.Component {
                             </div>
                         )
                     }
-                    <div className="form-group col-md-3 p-2 mt-3">
-                        <Pagination hideNavigation
 
-                                    hideFirstLastPages
-                                    activePage={this.state.activePage}
-                                    itemsCountPerPage={this.state.itemsCountPerPage}
-                                    totalItemsCount={this.state.totalItemsCount}
-                                    pageRangeDisplayed={5}
-                                    itemClass='page-item'
-                                    linkClass='btn btn-light'
-                                    onChange={this.handlePageChange}
-                        />
-                    </div>
+                    <PaginationComponent activePage={this.state.activePage}
+                                         itemsCountPerPage={this.state.itemsCountPerPage}
+                                         totalItemsCount={this.state.totalItemsCount}
+                                         handlePageChange={this.handlePageChange}/>
                     <button className={"btn btn-dark mt-2"} onClick={this.sendTest}>Send test</button>
                 </div>
             </div>

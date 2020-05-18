@@ -3,10 +3,11 @@ package st52572.nnpia.quizer.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import st52572.nnpia.quizer.model.Test;
+import st52572.nnpia.quizer.model.TestDto;
 
 public interface ITestService {
 
-    Integer add(Test test);
+    void add(TestDto test);
 
     Page<Test> getAll(Pageable pageable);
 
@@ -16,7 +17,7 @@ public interface ITestService {
 
     Page<Test> getAllUserTestsFiltered(int id, String filer, Pageable pageable);
 
-    Test get(int id);
+    TestDto get(int id);
 
     void delete(int id);
 

@@ -11,7 +11,7 @@ public interface TestRepository extends PagingAndSortingRepository<Test, Integer
 
     //Page<Test> findByName(String name, Pageable pageable);
 
-    Page<Test> findByNameIsLike(String name, Pageable pageable);
+    Page<Test> findByNameIsLikeOrTagIsLike(String name, String tag, Pageable pageable);
 
     Page<Test> findByUser_Id(int id, Pageable pageable);
 

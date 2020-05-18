@@ -17,6 +17,8 @@ export class Logout extends React.Component {
                 localStorage.removeItem("userInfo");
                 UserProfile.setId(null);
                 UserProfile.setUsername(null);
+                this.props.onLogOut();
+                this.props.history.push('/login');
             } else {
                 this.setState({message: res.data.message});
             }
