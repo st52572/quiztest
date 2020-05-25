@@ -9,7 +9,7 @@ import st52572.nnpia.quizer.model.User;
 import st52572.nnpia.quizer.model.UserDto;
 import st52572.nnpia.quizer.service.IUserService;
 
-@CrossOrigin(origins = "*", maxAge = 3600, allowedHeaders = "*", allowCredentials = "*")
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {
