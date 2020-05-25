@@ -74,7 +74,7 @@ export class CreateEditTest extends React.Component {
             name: this.state.name,
             user: {id: UserProfile.getId()},
             questions: this.state.questions
-        }, Server.getUrl+'tests/add')
+        }, Server.getUrl()+'tests/add')
             .then();
 
     };
@@ -82,7 +82,7 @@ export class CreateEditTest extends React.Component {
 
     load = () => {
         const id = this.props.match.params.id;
-        FetchUtil.createFetchGet(Server.getUrl+'tests/' + id)
+        FetchUtil.createFetchGet(Server.getUrl()+'tests/' + id)
             .then(response => response.json())
             .then(data => this.setState({
                 tag: data.tag,

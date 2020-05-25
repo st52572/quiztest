@@ -13,7 +13,7 @@ export class Registration extends React.Component {
 
     register = (e) => {
         e.preventDefault();
-        FetchUtil.createFetchPostNoBearer(this.state.user,Server.getUrl+'users/add').then();
+        FetchUtil.createFetchPostNoBearer(this.state.user,Server.getUrl()+'users/add').then();
         this.props.history.push('/login');
     };
 

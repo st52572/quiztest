@@ -26,6 +26,7 @@ export class Login extends React.Component {
                 UserProfile.setId(data.id);
                 UserProfile.setUsername(data.username);
             });
+        console.log(credentials);
         AuthService.login(credentials).then(res => {
             if (res.data.status === 200) {
                 localStorage.setItem("userInfo", JSON.stringify(res.data.result));
@@ -52,7 +53,7 @@ export class Login extends React.Component {
 
     render() {
         return (
-            <form>
+         <React.Fragment>
                 <div className="form-group col-md-3">
                     <Input type={"text"} chaning={"username"} onChange={this.change} text={"username"}/>
                 </div>
@@ -62,7 +63,7 @@ export class Login extends React.Component {
                 <div className="form-group col-md-3">
                     <button className={"btn btn-dark"} onClick={this.login}>Login</button>
                 </div>
-            </form>
+         </React.Fragment>
         )
     }
 
