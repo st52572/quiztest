@@ -56,13 +56,13 @@ export class Login extends React.Component {
         return (
          <React.Fragment>
                 <div className="form-group col-md-3">
-                    <Input type={"text"} chaning={"username"} onChange={this.change} text={"username"}/>
+                    <Input name={"username"} type={"text"} chaning={"username"} onChange={this.change} text={"username"}/>
                 </div>
                 <div className="form-group col-md-3">
-                    <Input type={"current-password"} chaning={"password"} onChange={this.change} text={"password"}/>
+                    <Input name={"password"} type={"current-password"} chaning={"password"} onChange={this.change} text={"password"}/>
                 </div>
                 <div className="form-group col-md-3">
-                    <button className={"btn btn-dark"} onClick={this.login}>Login</button>
+                    <button className={"btn btn-dark btn-login"} onClick={this.login}>Login</button>
                 </div>
          </React.Fragment>
         )

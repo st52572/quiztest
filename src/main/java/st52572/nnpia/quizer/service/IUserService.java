@@ -3,19 +3,19 @@ package st52572.nnpia.quizer.service;
 import st52572.nnpia.quizer.model.User;
 import st52572.nnpia.quizer.model.UserDto;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface IUserService {
 
-    User save(UserDto user);
+    User saveUser(UserDto user);
 
-    List<User> findAll();
+    User findOneUser(String username);
 
-    void delete(int id);
+    User findUserById(int id);
 
-    User findOne(String username);
 
-    User findById(int id);
+    @Transactional
+    void deleteByUsername(String username);
 
-    UserDto update(UserDto userDto);
 }

@@ -20,7 +20,7 @@ export class Input extends React.Component {
                 <div className="input-group-prepend mt-2">
                     <span className="input-group-text" id="basic-addon1">{this.props.text}</span>
                 </div>
-                <input className={"form-control"} type={this.props.type} onChange={this.handleChange}
+                <input name={this.props.name} className={"form-control"} type={this.props.type} onChange={this.handleChange}
                        value={this.props.value}/>
             </React.Fragment>
         )

@@ -22,42 +22,40 @@ public class TestController {
 
 
     @PostMapping
-    public Page<Test> getTests(Pageable pageable) {
-        return iTestService.getAll(pageable);
+    public Page<Test> getAllTests(Pageable pageable) {
+        return iTestService.getAllTests(pageable);
     }
 
     @PostMapping("/filtered")
-    public Page<Test> getTests(@RequestBody Filter filter, Pageable pageable) {
+    public Page<Test> getAllTestsFiltered(@RequestBody Filter filter, Pageable pageable) {
 
-        return iTestService.getAllFiltered(filter.getFilter(), pageable);
+        return iTestService.getAllTestsFiltered(filter.getFilter(), pageable);
     }
 
     @PostMapping("/user/{id}")
-    public Page<Test> getTests(@PathVariable int id, Pageable pageable) {
+    public Page<Test> getUserTests(@PathVariable int id, Pageable pageable) {
         return iTestService.getAllUserTests(id, pageable);
     }
 
     @PostMapping("/user/filtered/{id}")
-    public Page<Test> getTests(@PathVariable int id, @RequestBody Filter filter, Pageable pageable) {
+    public Page<Test> getUserTestsFiltered(@PathVariable int id, @RequestBody Filter filter, Pageable pageable) {
         return iTestService.getAllUserTestsFiltered(id, filter.getFilter(), pageable);
     }
 
     @GetMapping(value = {"/{id}"})
     public TestDto getTest(@PathVariable int id) {
-        return iTestService.get(id);
+        return iTestService.getTest(id);
     }
 
     @PostMapping("/add")
     public void addTest(@RequestBody TestDto test) {
-        System.out.println(test);
-        iTestService.add(test);
+        iTestService.saveTest(test);
     }
 
     @PostMapping("/delete/{id}")
     @Transactional
     public void deleteTest(@PathVariable int id) {
-        System.out.println(id);
-        iTestService.delete(id);
+        iTestService.deleteTest(id);
     }
 
 

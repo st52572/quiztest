@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface IQuestionService {
 
-    Page<Question> getQuestions(int id, Pageable pageable);
+    Page<Question> getTestQuestions(int id, Pageable pageable);
 
     double checkTest(List<Question> answers);
 
-    List<Question> getAllQuestions(int testId);
+    List<Question> getAllTestQuestions(int testId);
 
-    void addQuestions(List<Question> questions);
+    void saveQuestions(List<Question> questions);
 
-    void delete(int id);
+    void deleteQuestion(int id);
 }

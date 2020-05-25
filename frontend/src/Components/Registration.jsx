@@ -13,7 +13,7 @@ export class Registration extends React.Component {
 
     register = (e) => {
         e.preventDefault();
-        FetchUtil.createFetchPostNoBearer(this.state.user,Server.getUrl()+'users/add').then();
+        FetchUtil.createFetchPostNoBearer(this.state.user,Server.getUrl()+'users/save').then();
         this.props.history.push('/login');
     };
 
@@ -30,19 +30,19 @@ export class Registration extends React.Component {
         return (
                 <form>
                     <div className="form-group col-md-3">
-                        <Input type={"text"} chaning={"firstName"} onChange={this.change} text={"firstName"}/>
+                        <Input name={"firstName"} type={"text"} chaning={"firstName"} onChange={this.change} text={"firstName"}/>
                     </div>
                     <div className="form-group col-md-3">
-                        <Input type={"text"} chaning={"lastName"} onChange={this.change} text={"lastName"}/>
+                        <Input name={"lastName"} type={"text"} chaning={"lastName"} onChange={this.change} text={"lastName"}/>
                     </div>
                     <div className="form-group col-md-3">
-                        <Input type={"text"} chaning={"username"} onChange={this.change} text={"username"}/>
+                        <Input name={"username"} type={"text"} chaning={"username"} onChange={this.change} text={"username"}/>
                     </div>
                     <div className="form-group col-md-3">
-                        <Input type={"password"} chaning={"password"} onChange={this.change} text={"password"}/>
+                        <Input name={"password"} type={"password"} chaning={"password"} onChange={this.change} text={"password"}/>
                     </div>
                     <div className="form-group col-md-3">
-                        <button className={"btn btn-dark"} onClick={this.register}>Registrovat</button>
+                        <button className={"btn btn-dark btn-register"} onClick={this.register}>Registrovat</button>
                     </div>
                 </form>
         )

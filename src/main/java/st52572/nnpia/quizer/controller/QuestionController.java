@@ -20,12 +20,12 @@ public class QuestionController {
 
 
     @GetMapping("/{id}")
-    public Page<Question> getQuestions(@PathVariable int id, Pageable pageable) {
-        return iQuestionService.getQuestions(id,pageable);
+    public Page<Question> getTestQuestions(@PathVariable int id, Pageable pageable) {
+        return iQuestionService.getTestQuestions(id,pageable);
     }
     @GetMapping("/all/{id}")
-    public List<Question> getAllQuestions(@PathVariable int id) {
-        return iQuestionService.getAllQuestions(id);
+    public List<Question> getAllTestQuestions(@PathVariable int id) {
+        return iQuestionService.getAllTestQuestions(id);
     }
 
     @PostMapping("/checkTest")
@@ -34,14 +34,14 @@ public class QuestionController {
     }
 
     @PostMapping("/save")
-    public void addQuestions(@RequestBody List<Question> questions) {
-        iQuestionService.addQuestions(questions);
+    public void saveQuestions(@RequestBody List<Question> questions) {
+        iQuestionService.saveQuestions(questions);
     }
 
     @PostMapping("/delete/{id}")
     @Transactional
     public void deleteQuestion(@PathVariable int id) {
-        iQuestionService.delete(id);
+        iQuestionService.deleteQuestion(id);
     }
 
 }

@@ -14,10 +14,8 @@ import st52572.nnpia.quizer.model.User;
 import st52572.nnpia.quizer.model.UserDto;
 import st52572.nnpia.quizer.service.IUserService;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import javax.transaction.Transactional;
+import java.util.*;
 
 
 @Service(value = "userService")
@@ -38,43 +36,39 @@ public class UserService implements UserDetailsService, IUserService {
 	}
 
 	private List<SimpleGrantedAuthority> getAuthority() {
-		return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		return Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
 	}
 
-	public List<User> findAll() {
-		List<User> list = new ArrayList<>();
-		userRepository.findAll().iterator().forEachRemaining(list::add);
-		return list;
-	}
 
 	@Override
-	public void delete(int id) {
-		userRepository.deleteById(id);
-	}
-
-	@Override
-	public User findOne(String username) {
+	public User findOneUser(String username) {
 		return userRepository.findByUsername(username);
 	}
 
 	@Override
-	public User findById(int id) {
+	public User findUserById(int id) {
 		Optional<User> optionalUser = userRepository.findById(id);
-		return optionalUser.isPresent() ? optionalUser.get() : null;
+		return optionalUser.orElse(null);
 	}
 
-	@Override
-	public UserDto update(UserDto userDto) {
-		User user = findById(userDto.getId());
+	/*@Override
+	public UserDto updateUser(UserDto userDto) {
+		User user = findUserById(userDto.getId());
 		if (user != null) {
 			BeanUtils.copyProperties(userDto, user, "password", "username");
 			userRepository.save(user);
 		}
 		return userDto;
+	}*/
+
+	@Override
+	@Transactional
+	public void deleteByUsername(String username) {
+		userRepository.deleteByUsername(username);
 	}
 
 	@Override
-	public User save(UserDto user) {
+	public User saveUser(UserDto user) {
 		User newUser = new User();
 		newUser.setUsername(user.getUsername());
 		newUser.setFirstName(user.getFirstName());

@@ -1,21 +1,14 @@
 package st52572.nnpia.quizer.service;
 
-
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
 import org.springframework.test.context.junit4.SpringRunner;
 import st52572.nnpia.quizer.model.Question;
-import st52572.nnpia.quizer.model.User;
-import st52572.nnpia.quizer.testutil.Creator;
+import st52572.nnpia.quizer.model.Test;
+
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertEquals;
 
@@ -27,44 +20,27 @@ public class QuestionServiceTest {
     @Mock
     IQuestionService iQuestionServiceMocked;
 
-    @Autowired
-    IQuestionService iQuestionService;
 
-    @Autowired
-    ITestService iTestService;
-
-    @Autowired
-    Creator creator;
-
-    @Test
-    public void addQuestions() {
-        /*Question question = new Question();
-        Question question2 = new Question();
-        Question question3 = new Question();
-        List<Question> insertedQuestionList = new ArrayList<>();
-        insertedQuestionList.add(question);
-        insertedQuestionList.add(question2);
-
-
-        Page<Question> realDatabaseList = new ArrayList<>();
-        realDatabaseList.add(question3);
-
-        when(iQuestionServiceMocked.addQuestions(anyList())).thenReturn(insertedQuestionList);
-
-        when(iQuestionServiceMocked.getQuestions(anyInt(),any())).thenReturn(realDatabaseList);
-
-        realDatabaseList.addAll(iQuestionServiceMocked.addQuestions(insertedQuestionList));
-
-
-        Page<Question> databaseList = iQuestionServiceMocked.getQuestions(1,any());
-        assertEquals(realDatabaseList.size(), databaseList.size());
-*/
-    }
-
-
-    @Test
+    @org.junit.Test
     public void getQuestions() {
 
+        Test test = new Test();
+        test.setId(1);
+        test.setName("test");
+        test.setTag("tag");
+        Question question = new Question();
+        question.setId(1);
+        question.setQuestion("question");
+        question.setAnswer("answer");
+        question.setTest(test);
+
+        when(iQuestionServiceMocked.getAllTestQuestions(1)).thenReturn(new ArrayList<Question>(){{add(question);}});
+        when(iQuestionServiceMocked.getAllTestQuestions(2)).thenReturn(new ArrayList<>());
+
+        assertEquals(1, iQuestionServiceMocked.getAllTestQuestions(1).size());
+        assertEquals(0, iQuestionServiceMocked.getAllTestQuestions(2).size());
     }
+
+
 
 }

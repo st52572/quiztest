@@ -7,18 +7,18 @@ import st52572.nnpia.quizer.model.TestDto;
 
 public interface ITestService {
 
-    void add(TestDto test);
+    void saveTest(TestDto test);
 
-    Page<Test> getAll(Pageable pageable);
+    Page<Test> getAllTests(Pageable pageable);
 
-    Page<Test> getAllFiltered(String filer, Pageable pageable);
+    Page<Test> getAllTestsFiltered(String filer, Pageable pageable);
 
     Page<Test> getAllUserTests(int id, Pageable pageable);
 
     Page<Test> getAllUserTestsFiltered(int id, String filer, Pageable pageable);
 
-    TestDto get(int id);
+    TestDto getTest(int id);
 
-    void delete(int id);
+    void deleteTest(int id);
 
 }

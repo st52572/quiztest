@@ -17,34 +17,23 @@ public class UserController {
     @Autowired
     private IUserService iUserService;
 
-    @Autowired
-    private UserRepository userRepository;
 
-    /*@GetMapping("/users")
-    public List<User> getUsers() {
-        return userDao.findAll();
-    }*/
 
-    @PostMapping("/add")
+    @PostMapping("/save")
     public ApiResponse<User> saveUser(@RequestBody UserDto user) {
-        return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.", iUserService.save(user));
+        return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.", iUserService.saveUser(user));
     }
 
-    /*@GetMapping(value = {"/delete/{id}"})
-    public boolean deleteUser(@PathVariable int id) {
-        userDao.delete(userDao.getOne(id));
-        return true;
-    }*/
 
     @PostMapping("/{id}")
     public ApiResponse<User> getOne(@PathVariable int id) {
-        return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.", iUserService.findById(id));
+        return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.", iUserService.findUserById(id));
     }
 
 
     @PostMapping("/get")
     public User getUser(@RequestBody UserDto user) {
-        User one = iUserService.findOne(user.getUsername());
+        User one = iUserService.findOneUser(user.getUsername());
         if (one != null) {
             one.setPassword(null);
             return one;

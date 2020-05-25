@@ -26,7 +26,7 @@ public class TestService implements ITestService {
     private IQuestionService iQuestionService;
 
     @Override
-    public void add(TestDto test) {
+    public void saveTest(TestDto test) {
         Test insertedTest = new Test();
         insertedTest.setName(test.getName());
         insertedTest.setTag(test.getTag());
@@ -35,17 +35,19 @@ public class TestService implements ITestService {
             insertedTest.setId(test.getId());
         }
         testRepository.save(insertedTest);
-        test.getQuestions().forEach(question -> question.setTest(insertedTest));
-        iQuestionService.addQuestions(test.getQuestions());
+        if(test.getQuestions()!=null && test.getQuestions().size() > 0) {
+            test.getQuestions().forEach(question -> question.setTest(insertedTest));
+            iQuestionService.saveQuestions(test.getQuestions());
+        }
     }
 
     @Override
-    public Page<Test> getAll(Pageable pageable) {
+    public Page<Test> getAllTests(Pageable pageable) {
         return testRepository.findAll(pageable);
     }
 
     @Override
-    public Page<Test> getAllFiltered(String filter, Pageable pageable) {
+    public Page<Test> getAllTestsFiltered(String filter, Pageable pageable) {
         return testRepository.findByNameIsLikeOrTagIsLike("%" + filter + "%", "%" + filter + "%", pageable);
     }
 
@@ -60,7 +62,7 @@ public class TestService implements ITestService {
     }
 
     @Override
-    public TestDto get(int id) {
+    public TestDto getTest(int id) {
         Optional<Test> test = testRepository.findById(id);
         if (test.isPresent()) {
             Test t = test.get();
@@ -68,14 +70,14 @@ public class TestService implements ITestService {
             testDto.setId(t.getId());
             testDto.setName(t.getName());
             testDto.setTag(t.getTag());
-            testDto.setQuestions(iQuestionService.getAllQuestions(id));
+            testDto.setQuestions(iQuestionService.getAllTestQuestions(id));
             return testDto;
         }
         return new TestDto();
     }
 
     @Override
-    public void delete(int id) {
+    public void deleteTest(int id) {
         testRepository.deleteById(id);
     }
 }

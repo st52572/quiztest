@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AuthService from './AuthService';
 
-const USER_API_BASE_URL = 'https://quizer-st52572.herokuapp.com/';
+const USER_API_BASE_URL = Server.getUrl() +'users';
 
 class UserService {
 
