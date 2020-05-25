@@ -71,10 +71,10 @@ export class UserListTests extends React.Component {
                 <FilterComponent changeFilter={this.changeFilter} filter={this.state.filter}/>
                 <div className="form-group ml-3">
                     <TestComponent onDelete={this.onDelete} editMode={true} tests={this.state.tests}/>
-                    <PaginationComponent activePage={this.state.activePage}
-                                         itemsCountPerPage={this.state.itemsCountPerPage}
-                                         totalItemsCount={this.state.totalItemsCount}
-                                         handlePageChange={this.handlePageChange}/>
+                        <PaginationComponent activePage={this.state.activePage}
+                                             itemsCountPerPage={this.state.itemsCountPerPage}
+                                             totalItemsCount={this.state.totalItemsCount}
+                                             handlePageChange={this.handlePageChange}/>
                 </div>
             </React.Fragment>
         )
