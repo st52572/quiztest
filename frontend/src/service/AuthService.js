@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const USER_API_BASE_URL = 'http://localhost:8080/token/';
+const USER_API_BASE_URL = 'https://quizer-st52572.herokuapp.com/token/';
 
 class AuthService {
 
