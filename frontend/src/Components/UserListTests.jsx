@@ -4,7 +4,7 @@ import FetchUtil from "../service/FetchUtil";
 import {FilterComponent} from "./FilterComponent";
 import {PaginationComponent} from "./PaginationComponent";
 import {TestComponent} from "./TestComponent";
-import Server from "../service/FetchUtil";
+import Server from "../service/Server";
 
 export class UserListTests extends React.Component {
 
@@ -12,12 +12,12 @@ export class UserListTests extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            tests: [],
             filter: "",
             activePage: 0,
             totalPages: 0,
             itemsCountPerPage: 0,
             totalItemsCount: 0,
-            tests: [],
             pageSize: 4
         };
 
@@ -32,9 +32,10 @@ export class UserListTests extends React.Component {
 
     fetchURL(page, filter) {
         const id = UserProfile.getId();
-        let url = Server.getUrl+'tests/user/' + id + '?page=' + page + '&size=' + this.state.pageSize;
+        console.log(id);
+        let url = Server.getUrl()+'tests/user/' + id + '?page=' + page + '&size=' + this.state.pageSize;
         if (filter) {
-            url = Server.getUrl+'tests/user/filtered/' + id + '?page=' + page + '&size=' + this.state.pageSize;
+            url = Server.getUrl()+'tests/user/filtered/' + id + '?page=' + page + '&size=' + this.state.pageSize;
         }
         FetchUtil.createFetchPost({filter}, url)
             .then(response => response.json())
@@ -60,7 +61,7 @@ export class UserListTests extends React.Component {
     }
 
     onDelete = (id) => {
-        let url = Server.getUrl+'tests/delete/' + id;
+        let url = Server.getUrl()+'tests/delete/' + id;
         FetchUtil.createFetchPost(null, url)
             .then(value => this.fetchURL(0, this.state.filter));
     };

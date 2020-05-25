@@ -1,7 +1,7 @@
 import React from 'react';
 import {Input} from "./Input";
 import FetchUtil from "../service/FetchUtil";
-import Server from "../service/FetchUtil";
+import Server from "../service/Server";
 
 export class Registration extends React.Component {
 
@@ -13,7 +13,7 @@ export class Registration extends React.Component {
 
     register = (e) => {
         e.preventDefault();
-        FetchUtil.createFetchPostNoBearer(this.state.user,Server.getUrl+'users/add').then();
+        FetchUtil.createFetchPostNoBearer(this.state.user,Server.getUrl()+'users/add').then();
         this.props.history.push('/login');
     };
 

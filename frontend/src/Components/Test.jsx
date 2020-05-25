@@ -2,7 +2,7 @@ import React from 'react';
 import {Input} from "./Input";
 import FetchUtil from "../service/FetchUtil";
 import {PaginationComponent} from "./PaginationComponent";
-import Server from "../service/FetchUtil";
+import Server from "../service/Server";
 
 export class Test extends React.Component {
 
@@ -36,7 +36,7 @@ export class Test extends React.Component {
         if (!this.state.loadedPages.includes(page)) {
             this.setState({loadedPages: [...this.state.loadedPages, page]});
             const id = this.props.match.params.id;
-            FetchUtil.createFetchGet(Server.getUrl+'questions/' + id + '?page=' + page + '&size=' + this.state.pageSize)
+            FetchUtil.createFetchGet(Server.getUrl()+'questions/' + id + '?page=' + page + '&size=' + this.state.pageSize)
                 .then(response => response.json())
                 .then(data => {
                     this.setState({
@@ -77,7 +77,7 @@ export class Test extends React.Component {
 
     sendTest = () => {
         const test = this.state.allTests;
-        FetchUtil.createFetchPost(test.questions, Server.getUrl+'questions/checkTest')
+        FetchUtil.createFetchPost(test.questions, Server.getUrl()+'questions/checkTest')
             .then(response => response.json())
             .then(data => this.setState({result: "Result of test: " + data * 100 + "%"}));
     };

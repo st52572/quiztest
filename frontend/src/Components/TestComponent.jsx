@@ -16,7 +16,7 @@ export class TestComponent extends React.Component {
                             :
                             <React.Fragment>
                                 <button className={"btn btn-danger"}
-                                        onClick={this.props.onDelete(value.id)}>Delete
+                                        onClick={()=>this.props.onDelete(value.id)}>Delete
                                 </button>
                                 <Link className={"btn btn-dark ml-2"} to={"/test-edit/" + value.id}>Edit test</Link>
                             </React.Fragment>

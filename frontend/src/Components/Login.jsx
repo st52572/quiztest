@@ -3,7 +3,7 @@ import {Input} from "./Input";
 import AuthService from "../service/AuthService";
 import UserProfile from "./UserProfile";
 import FetchUtil from "../service/FetchUtil";
-import Server from "../service/FetchUtil";
+import Server from "../service/Server";
 
 export class Login extends React.Component {
 
@@ -18,9 +18,10 @@ export class Login extends React.Component {
     }
 
 
-    login = () => {
+    login = (e) => {
+        e.preventDefault();
         const credentials = {username: this.state.user.username, password: this.state.user.password};
-        FetchUtil.createFetchPostNoBearer({username: credentials.username}, Server.getUrl+'users/get')
+        FetchUtil.createFetchPostNoBearer({username: credentials.username}, Server.getUrl() + 'users/get')
             .then(response => response.json())
             .then(data => {
                 UserProfile.setId(data.id);

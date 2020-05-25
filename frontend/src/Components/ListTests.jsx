@@ -3,7 +3,7 @@ import FetchUtil from "../service/FetchUtil";
 import {TestComponent} from "./TestComponent";
 import {PaginationComponent} from "./PaginationComponent";
 import {FilterComponent} from "./FilterComponent";
-import Server from "../service/FetchUtil";
+import Server from "../service/Server";
 
 export class ListTests extends React.Component {
 
@@ -30,9 +30,9 @@ export class ListTests extends React.Component {
     }
 
     fetchURL(page, filter) {
-        let url = Server.getUrl+'tests?page=' + page + '&size=' + this.state.pageSize;
+        let url = Server.getUrl()+'tests?page=' + page + '&size=' + this.state.pageSize;
         if (filter) {
-            url = Server.getUrl+'tests/filtered?page=' + page + '&size=' + this.state.pageSize;
+            url = Server.getUrl()+'tests/filtered?page=' + page + '&size=' + this.state.pageSize;
         }
         FetchUtil.createFetchPost({filter}, url)
             .then(response => response.json())
