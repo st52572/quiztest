@@ -10,8 +10,8 @@ import st52572.nnpia.quizer.service.IQuestionService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@CrossOrigin
 @RequestMapping("/questions")
 public class QuestionController {
 

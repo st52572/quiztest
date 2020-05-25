@@ -11,8 +11,8 @@ import st52572.nnpia.quizer.model.TestDto;
 import st52572.nnpia.quizer.service.ITestService;
 
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@CrossOrigin
 @RequestMapping("/tests")
 public class TestController {
 
