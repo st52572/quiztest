@@ -9,7 +9,7 @@ import st52572.nnpia.quizer.model.User;
 import st52572.nnpia.quizer.model.UserDto;
 import st52572.nnpia.quizer.service.IUserService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -26,6 +26,7 @@ public class UserController {
     }*/
 
     @PostMapping("/add")
+    @CrossOrigin
     public ApiResponse<User> saveUser(@RequestBody UserDto user) {
         return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.", iUserService.save(user));
     }
