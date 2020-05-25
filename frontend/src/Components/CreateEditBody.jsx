@@ -18,7 +18,7 @@ export class CreateEditBody extends React.Component {
                             <Input onChange={this.props.change} chaning={"answer"} type={"text"} index={index}
                                    text={"Answer:"} value={value.answer}/>
                             <button className={"btn btn-dark mt-2"}
-                                    onClick={
+                                    onClick={()=>
                                         this.props.remove(index,value.id)
                                     }>Remove
                             </button>
