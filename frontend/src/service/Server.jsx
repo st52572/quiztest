@@ -1,4 +1,4 @@
-const USER_API_BASE_URL = 'http://quizer-st52572.herokuapp.com/';
+const USER_API_BASE_URL = 'https://quizer-st52572.herokuapp.com/';
 
 class Server {
 
