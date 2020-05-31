@@ -31,7 +31,6 @@ public class UserServiceTest {
         user.setPassword("pwd");
         user.setFirstName("fn");
         user.setLastName("ln");
-
         iUserService.saveUser(user);
 
         User u = iUserService.findOneUser("usr");
