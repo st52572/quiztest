@@ -74,7 +74,7 @@ export class CreateEditTest extends React.Component {
             name: this.state.name,
             user: {id: UserProfile.getId()},
             questions: this.state.questions
-        }, Server.getUrl()+'addTest')
+        }, Server.getUrl()+'tests/addTest')
             .then();
 
     };
