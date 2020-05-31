@@ -84,13 +84,20 @@ public class TestServiceTest {
         iTestService.setQuestionService(iQuestionServiceMocked);
 
         doNothing().when(iQuestionServiceMocked).saveQuestions(list);
-        when(iQuestionServiceMocked.getAllTestQuestions(anyInt())).thenReturn(list);
+
 
         iTestService.saveTest(test);
 
         Page<Test> page = iTestService.getAllUserTests(iUserService.findOneUser("usr").getId(),null);
 
+
         assertEquals(1,page.getSize());
+
+
+        Test t = page.getContent().get(0);
+        when(iQuestionServiceMocked.getAllTestQuestions(t.getId())).thenReturn(list);
+
+        assertEquals(list,iQuestionServiceMocked.getAllTestQuestions(t.getId()));
 
         iUserService.deleteByUsername("usr");
         page.get().forEach(test1 -> iTestService.deleteTest(test1.getId()));

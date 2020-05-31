@@ -30,9 +30,9 @@ export class ListTests extends React.Component {
     }
 
     fetchURL(page, filter) {
-        let url = Server.getUrl()+'tests?page=' + page + '&size=' + this.state.pageSize;
+        let url = Server.getUrl()+'tests/getAllTests?page=' + page + '&size=' + this.state.pageSize;
         if (filter) {
-            url = Server.getUrl()+'tests/filtered?page=' + page + '&size=' + this.state.pageSize;
+            url = Server.getUrl()+'tests/getAllTestsFiltered?page=' + page + '&size=' + this.state.pageSize;
         }
         FetchUtil.createFetchPost({filter}, url)
             .then(response => response.json())

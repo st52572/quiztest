@@ -21,7 +21,7 @@ export class Login extends React.Component {
     login = (e) => {
         e.preventDefault();
         const credentials = {username: this.state.user.username, password: this.state.user.password};
-        FetchUtil.createFetchPostNoBearer({username: credentials.username}, Server.getUrl() + 'users/get')
+        FetchUtil.createFetchPostNoBearer({username: credentials.username}, Server.getUrl() + 'users/getUser')
             .then(response => response.json())
             .then(data => {
                 UserProfile.setId(data.id);

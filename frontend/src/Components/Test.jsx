@@ -36,7 +36,7 @@ export class Test extends React.Component {
         if (!this.state.loadedPages.includes(page)) {
             this.setState({loadedPages: [...this.state.loadedPages, page]});
             const id = this.props.match.params.id;
-            FetchUtil.createFetchGet(Server.getUrl()+'questions/' + id + '?page=' + page + '&size=' + this.state.pageSize)
+            FetchUtil.createFetchGet(Server.getUrl()+'questions/getTestQuestions/' + id + '?page=' + page + '&size=' + this.state.pageSize)
                 .then(response => response.json())
                 .then(data => {
                     this.setState({

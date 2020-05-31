@@ -49,8 +49,8 @@ export class CreateEditTest extends React.Component {
     removeEdit = (index, id) => {
 
         if (id) {
-            const url = Server.getUrl()+'questions/delete/' + id;
-            FetchUtil.createFetchPost(null, url).then(value => this.load());
+            const url = Server.getUrl()+'questions/deleteQuestion/' + id;
+            FetchUtil.createFetchPost(null, url).then(() => this.load());
         } else {
             this.removeFromQuestions(index);
         }
@@ -74,7 +74,7 @@ export class CreateEditTest extends React.Component {
             name: this.state.name,
             user: {id: UserProfile.getId()},
             questions: this.state.questions
-        }, Server.getUrl()+'tests/add')
+        }, Server.getUrl()+'addTest')
             .then();
 
     };
@@ -82,7 +82,7 @@ export class CreateEditTest extends React.Component {
 
     load = () => {
         const id = this.props.match.params.id;
-        FetchUtil.createFetchGet(Server.getUrl()+'tests/' + id)
+        FetchUtil.createFetchGet(Server.getUrl()+'tests/getTest/' + id)
             .then(response => response.json())
             .then(data => this.setState({
                 tag: data.tag,

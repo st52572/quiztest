@@ -19,11 +19,11 @@ public class QuestionController {
     private IQuestionService iQuestionService;
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/getTestQuestions/{id}")
     public Page<Question> getTestQuestions(@PathVariable int id, Pageable pageable) {
         return iQuestionService.getTestQuestions(id,pageable);
     }
-    @GetMapping("/all/{id}")
+    @GetMapping("/getAllTestQuestions/{id}")
     public List<Question> getAllTestQuestions(@PathVariable int id) {
         return iQuestionService.getAllTestQuestions(id);
     }
@@ -33,12 +33,12 @@ public class QuestionController {
         return iQuestionService.checkTest(answers);
     }
 
-    @PostMapping("/save")
+    @PostMapping("/saveQuestions")
     public void saveQuestions(@RequestBody List<Question> questions) {
         iQuestionService.saveQuestions(questions);
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/deleteQuestion/{id}")
     @Transactional
     public void deleteQuestion(@PathVariable int id) {
         iQuestionService.deleteQuestion(id);

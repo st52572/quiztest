@@ -32,9 +32,9 @@ export class UserListTests extends React.Component {
 
     fetchURL(page, filter) {
         const id = UserProfile.getId();
-        let url = Server.getUrl()+'tests/user/' + id + '?page=' + page + '&size=' + this.state.pageSize;
+        let url = Server.getUrl()+'tests/getUserTests/' + id + '?page=' + page + '&size=' + this.state.pageSize;
         if (filter) {
-            url = Server.getUrl()+'tests/user/filtered/' + id + '?page=' + page + '&size=' + this.state.pageSize;
+            url = Server.getUrl()+'tests/getUserTestsFiltered/' + id + '?page=' + page + '&size=' + this.state.pageSize;
         }
         FetchUtil.createFetchPost({filter}, url)
             .then(response => response.json())
@@ -60,7 +60,7 @@ export class UserListTests extends React.Component {
     }
 
     onDelete = (id) => {
-        let url = Server.getUrl()+'tests/delete/' + id;
+        let url = Server.getUrl()+'tests/deleteTest/' + id;
         FetchUtil.createFetchPost(null, url)
             .then(() => this.fetchURL(0, this.state.filter));
     };

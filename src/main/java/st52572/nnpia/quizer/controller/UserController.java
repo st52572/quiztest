@@ -19,19 +19,19 @@ public class UserController {
 
 
 
-    @PostMapping("/save")
+    @PostMapping("/saveUser")
     public ApiResponse<User> saveUser(@RequestBody UserDto user) {
         return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.", iUserService.saveUser(user));
     }
 
 
-    @PostMapping("/{id}")
+    @PostMapping("/getOne/{id}")
     public ApiResponse<User> getOne(@PathVariable int id) {
         return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.", iUserService.findUserById(id));
     }
 
 
-    @PostMapping("/get")
+    @PostMapping("/getUser")
     public User getUser(@RequestBody UserDto user) {
         User one = iUserService.findOneUser(user.getUsername());
         if (one != null) {
