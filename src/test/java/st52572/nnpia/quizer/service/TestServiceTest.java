@@ -60,8 +60,6 @@ public class TestServiceTest {
 
         iUserService.deleteByUsername("usr");
         page.get().forEach(test1 -> iTestService.deleteTest(test1.getId()));
-
-
     }
     @org.junit.Test
     public void getUserTestsMocked() {
