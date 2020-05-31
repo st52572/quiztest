@@ -21,4 +21,6 @@ public interface ITestService {
 
     void deleteTest(int id);
 
+    void setQuestionService(IQuestionService questionService);
+
 }

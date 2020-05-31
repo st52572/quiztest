@@ -21,10 +21,10 @@ public class Test implements Serializable {
     @GeneratedValue
     private int id;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
-    @Column
+    @Column(nullable = false)
     private String tag;
 
     /*@JsonIgnore

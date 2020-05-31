@@ -13,7 +13,10 @@ public interface QuestionRepository extends PagingAndSortingRepository<Question,
 
     public List<Question> findAllByTestId(int testId);
 
-    public Page<Question> findAllByTest_Id(int id, Pageable pageable);
+    public Page<Question> findAllByTest_Id(int testId, Pageable pageable);
 
     public void deleteById(int id);
+
+    public void deleteByTest_Id(int testId);
 }
+

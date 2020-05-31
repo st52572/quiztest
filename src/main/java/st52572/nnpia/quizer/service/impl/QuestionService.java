@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import st52572.nnpia.quizer.dao.QuestionRepository;
 import st52572.nnpia.quizer.model.Question;
 import st52572.nnpia.quizer.service.IAnswersCheckerService;
@@ -48,5 +49,11 @@ public class QuestionService implements IQuestionService {
     @Override
     public void deleteQuestion(int id) {
         questionRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteQuestionByTestId(int testId) {
+        questionRepository.deleteByTest_Id(testId);
     }
 }

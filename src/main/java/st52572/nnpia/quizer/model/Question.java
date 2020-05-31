@@ -18,10 +18,10 @@ public class Question implements Serializable {
     @GeneratedValue
     private int id;
 
-    @Column
+    @Column(nullable = false)
     private String question;
 
-    @Column
+    @Column(nullable = false)
     private String answer;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -78,6 +78,12 @@ public class TestService implements ITestService {
 
     @Override
     public void deleteTest(int id) {
+        iQuestionService.deleteQuestionByTestId(id);
         testRepository.deleteById(id);
+    }
+
+    @Override
+    public void setQuestionService(IQuestionService questionService) {
+        iQuestionService = questionService;
     }
 }
